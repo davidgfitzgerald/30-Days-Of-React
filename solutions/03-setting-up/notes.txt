@@ -1,9 +1,0 @@
-https://github.com/davidgfitzgerald/30-Days-Of-React/blob/master/03_Day_Setting_Up/03_setting_up.md
-
-Visual Studio Extensions
-You may need to install these extensions from Visual Studio Code
-
-Prettier
-ESLint
-Bracket Pair Colorizer
-ES7 React/Redux/GraphQL/React-Native snippets

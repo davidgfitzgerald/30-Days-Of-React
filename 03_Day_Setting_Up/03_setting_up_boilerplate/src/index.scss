@@ -19,7 +19,7 @@ body {
   padding: 1vh 1vh 3vh;
 }
 
-.exercise2a {
+.front-end-tech {
   background-color: whitesmoke;
   padding: 1vh
 }
@@ -29,12 +29,12 @@ $lightblue-bg: #C2E6F4;
 $lightblue-skill: #2ACFCF;
 $lightred: #F37474;
 
-.exercise2b-wrapper {
+.subscribe-form-wrapper {
   background-color: whitesmoke;
   padding: 3vh;
 }
 
-.exercise2b {
+.subscribe-form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -75,12 +75,12 @@ $lightred: #F37474;
   border-radius: 100%;
 }
 
-.exercise3-wrapper {
+.personal-tech-profile-wrapper {
   padding: 3vh;
   background-color: whitesmoke;
 }
 
-.exercise3 {
+.personal-tech-profile {
   background-color: white;
   padding: 2vh;
 }

@@ -1,110 +1,142 @@
-// index.js
-import React from 'react'
-import ReactDOM from 'react-dom'
-import asabenehImage from './images/asabeneh.jpg'
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-const hexaColor = () => {
-  let str = '0123456789abcdef'
-  let color = ''
-  for (let i = 0; i < 6; i++) {
-    let index = Math.floor(Math.random() * str.length)
-    color += str[index]
-  }
-  return '#' + color
+import htmlLogoImage from './images/html_logo.png'
+import cssLogoImage from './images/css_logo.png'
+import jsLogoImage from './images/javascript_logo.png'
+import reactLogoImage from './images/react_logo.png'
+import meImage from './images/MeQMRiverside19-square.jpg'
+
+import './index.scss'
+
+const HTMLLogo = () => {
+  return (<img
+    src={htmlLogoImage}
+    alt="html5-logo"
+    className="logo"
+  />)
 }
 
-const HexaColor = () => {
-  const bgColor = hexaColor()
-  const styles = {
-    height: '100px',
-    display: 'flex',
-    'justify-content': 'center',
-    'align-items': 'center',
-    fontFamily: 'Montserrat',
-    margin: '2px auto',
-    borderRadius: '5px',
-    width: '75%',
-    border: '2px solid black',
-  }
+const CSSLogo = () => {
+  return (<img
+    src={cssLogoImage}
+    alt="css3-logo"
+    className="logo"
+  />)
+}
+
+const JSLogo = () => {
+  return (<img
+    src={jsLogoImage}
+    alt="js-logo"
+    className="logo"
+  />)
+}
+
+const ReactLogo = () => {
+  return (<img
+    src={reactLogoImage}
+    alt="react-logo"
+    className="logo"
+  />)
+}
+
+const Logos = () => {
+  return (<div className="logo-container">
+    <HTMLLogo/>
+    <CSSLogo/>
+    <JSLogo/>
+    <ReactLogo/>
+  </div>)
+}
+
+const FrontEndTechnologies = () => {
   return (
-    <div style={styles}>
-      <h2>{bgColor}</h2>
+    <div className="front-end-tech">
+      <b className="title">Front End Technologies</b>
+      <Logos/>
     </div>
   )
 }
 
-// Header Component
-const Header = () => (
-  <header>
-    <div className='header-wrapper'>
-      <h1>Welcome to 30 Days Of React</h1>
-      <h2>Getting Started React</h2>
-      <h3>JavaScript Library</h3>
-      <p>Asabeneh Yetayeh</p>
-      <small>Oct 3, 2020</small>
-    </div>
-  </header>
-)
-
-// User Card Component
-const UserCard = () => (
-  <div className='user-card'>
-    <img src={asabenehImage} alt='asabeneh image' />
-    <h2>Asabeneh Yetayeh</h2>
-  </div>
-)
-
-// TechList Component
-const TechList = () => {
-  const techs = ['HTML', 'CSS', 'JavaScript']
-  const techsFormatted = techs.map((tech) => <li key={tech}>{tech}</li>)
-  return techsFormatted
-}
-const buttonStyles = {
-  padding: '10px 20px',
-  background: 'rgb(0, 255, 0)',
-  border: 'none',
-  borderRadius: 5,
+// Exercise 2b
+const SignUp = () => {
+  return (<div>
+    <input id="first-name" placeholder="First Name" className="signup"/>
+    <input id="last-name" placeholder="Last Name" className="signup"/>
+    <input id="email" placeholder="Email" className="signup"/>
+  </div>)
 }
 
-const Button = () => <button style={buttonStyles}> action </button>
-
-// Main Component
-const Main = () => (
-  <main>
-    <div className='main-wrapper'>
-      <p>Prerequisite to get started react.js:</p>
-      <ul>
-        <TechList />
-      </ul>
-      <UserCard />
-      <div>
-        {/* Generate two different hexa colors every time */}
-        <HexaColor />
-        <HexaColor />
+const SubscribeForm = () => {
+  return (
+    <div className="subscribe-form-wrapper">
+      <div className="subscribe-form">
+        <h1>SUBSCRIBE</h1>
+        <p>Sign up with your email address to receive news and updates.</p>
+        <SignUp/>
+        <button className="subscribe">Subscribe</button>
       </div>
     </div>
-  </main>
-)
+  )
+}
 
-// Footer Component
-const Footer = () => (
-  <footer>
-    <div className='footer-wrapper'>
-      <p>Copyright 2020</p>
+const Skills = () => {
+  return (<div className="skills-container">
+      <div>HTML</div>
+      <div>CSS</div>
+      <div>Javascript</div>
+      <div>React</div>
+      <div>Python</div>
+      <div>AWS</div>
+      <div>Ruby</div>
+      <div>Rails</div>
+      <div>Jenkins</div>
+      <div>Linux</div>
+      <div>Shell Scripting</div>
+      <div>Networking</div>
+      <div>MySQL</div>
+      <div>Git</div>
     </div>
-  </footer>
-)
+  )
+}
 
-// The App, or the parent or the container component
-const App = () => (
-  <div className='app'>
-    <Header />
-    <Main />
-    <Footer />
-  </div>
-)
+const VerifiedTick = () => {
+  return(<svg viewBox="0 0 100 100" width="14" height="14">
+      <circle cx="50" cy="50" r="40" stroke="#2ACFCF" strokeWidth="4" fill="#2ACFCF"/>
+      <polygon points="45,75 80,40 70,30 35,65" fill="white"/>
+      <polygon points="35,65 25,55 35,45 45,55" fill="white"/>
+    </svg>
+  )
+}
 
+// Exercise 3
+const PersonalTechProfile = () => {
+  return (
+    <div className="personal-tech-profile-wrapper">
+      <div className="personal-tech-profile">
+        <img src={meImage} alt="me" className="me-pic"/>
+        <h3>DAVID FITZGERALD <VerifiedTick/></h3>
+        <p>Junior Developer, England</p>
+        <h4>SKILLS</h4>
+        <Skills/>
+        <p>Created on Jan 18, 2021</p>
+      </div>
+    </div>
+  )
+}
+
+const App = () => {
+  return (
+    <div>
+      <PersonalTechProfile/>
+      <FrontEndTechnologies/>
+      <SubscribeForm/>
+    </div>
+  )
+}
+
+// Render
 const rootElement = document.getElementById('root')
-// we render the App component using the ReactDOM package
-ReactDOM.render(<App />, rootElement)
+ReactDOM.render(<App/>, rootElement);
+

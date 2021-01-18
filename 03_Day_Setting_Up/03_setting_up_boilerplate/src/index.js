@@ -1,116 +1,122 @@
-// index.js
-import React from 'react'
-import ReactDOM from 'react-dom'
-// To get the root element from the HTML document
-import asabenehImage from './images/asabeneh.jpg'
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-// to import the doSomeMath from the math.js with or without extension
-import doSomeMath from './math.js'
+import htmlLogoImage from './images/html_logo.png'
+import cssLogoImage from './images/css_logo.png'
+import jsLogoImage from './images/javascript_logo.png'
+import reactLogoImage from './images/react_logo.png'
+import meImage from './images/MeQMRiverside19-square.jpg'
 
-// to import the other modules
-// since these modules were not exported as default we have to desctructure
-import { addTwo, multiply, subtract } from './math.js'
+import './index.scss'
 
-import * as everything from './math.js'
-console.log(addTwo(5, 5))
-console.log(doSomeMath.addTwo(5, 5))
-console.log(everything)
-// JSX element, header
+// Exercise 2a
+const htmlLogo = (<img
+  src={htmlLogoImage}
+  alt="html5-logo"
+  className="logo"
+/>)
 
+const cssLogo = (<img
+  src={cssLogoImage}
+  alt="css3-logo"
+  className="logo"
+/>)
 
-// JSX element, header
-const welcome = 'Welcome to 30 Days Of React'
-const title = 'Getting Started React'
-const subtitle = 'JavaScript Library'
-const author = {
-  firstName: 'Asabeneh',
-  lastName: 'Yetayeh',
-}
-const date = 'Oct 2, 2020'
+const jsLogo = (<img
+  src={jsLogoImage}
+  alt="js-logo"
+  className="logo"
+/>)
 
-// JSX element, header
-const header = (
-  <header>
-    <div className='header-wrapper'>
-      <h1>{welcome}</h1>
-      <h2>{title}</h2>
-      <h3>{subtitle}</h3>
-      <p>
-        Instructor: {author.firstName} {author.lastName}
-      </p>
-      <small>Date: {date}</small>
+const reactLogo = (<img
+  src={reactLogoImage}
+  alt="react-logo"
+  className="logo"
+/>)
+
+const logos = (<div className="logo-container">
+  {htmlLogo}
+  {cssLogo}
+  {jsLogo}
+  {reactLogo}
+</div>)
+
+const exercise2a = (
+  <div className="front-end-tech">
+    <b className="title">Front End Technologies</b>
+    {logos}
+  </div>
+)
+
+// Exercise 2b
+const signup = (<div>
+  <input id="first-name" placeholder="First Name" className="signup"/>
+  <input id="last-name" placeholder="Last Name" className="signup"/>
+  <input id="email" placeholder="Email" className="signup"/>
+</div>)
+
+const exercise2b = (
+  <div className="subscribe-form-wrapper">
+    <div className="subscribe-form">
+      <h1>SUBSCRIBE</h1>
+      <p>Sign up with your email address to receive news and updates.</p>
+      {signup}
+      <button className="subscribe">Subscribe</button>
     </div>
-  </header>
+  </div>
 )
 
-const numOne = 3
-const numTwo = 2
-
-const result = (
-  <p>
-    {numOne} + {numTwo} = {numOne + numTwo}
-  </p>
+const skills = (
+  <div className="skills-container">
+    <div>HTML</div>
+    <div>CSS</div>
+    <div>Javascript</div>
+    <div>React</div>
+    <div>Python</div>
+    <div>AWS</div>
+    <div>Ruby</div>
+    <div>Rails</div>
+    <div>Jenkins</div>
+    <div>Linux</div>
+    <div>Shell Scripting</div>
+    <div>Networking</div>
+    <div>MySQL</div>
+    <div>Git</div>
+  </div>
 )
 
-const yearBorn = 1820
-const currentYear = new Date().getFullYear()
-const age = currentYear - yearBorn
-const personAge = (
-  <p>
-    {' '}
-    {author.firstName} {author.lastName} is {age} years old
-  </p>
+const tick = (
+  <svg viewBox="0 0 100 100" width="14" height="14">
+    <circle cx="50" cy="50" r="40" stroke="#2ACFCF" strokeWidth="4" fill="#2ACFCF"/>
+    <polygon points="45,75 80,40 70,30 35,65" fill="white"/>
+    <polygon points="35,65 25,55 35,45 45,55" fill="white"/>
+  </svg>
 )
 
-// JSX element, main
-const techs = ['HTML', 'CSS', 'JavaScript']
-const techsFormatted = techs.map((tech) => <li>{tech}</li>)
+// Exercise 3
+const exercise3 = (
+  <div className="personal-tech-profile-wrapper">
+    <div className="personal-tech-profile">
+      <img src={meImage} alt="me" className="me-pic"/>
+      <h3>DAVID FITZGERALD {tick}</h3>
+      <p>Junior Developer, England</p>
+      <h4>SKILLS</h4>
+      {skills}
+      <p>Created on Jan 18, 2021</p>
+    </div>
+  </div>
+)
 
-const user = (
+const App = (
   <div>
-    <img src={asabenehImage} alt='asabeneh image' />
+    {exercise3}
+    {exercise2a}
+    {exercise2b}
   </div>
 )
 
-// JSX element, main
-const main = (
-  <main>
-    <div className='main-wrapper'>
-      <p>
-        Prerequisite to get started{' '}
-        <strong>
-          <em>react.js</em>
-        </strong>
-        :
-      </p>
-      <ul>{techsFormatted}</ul>
-      {result}
-      {personAge}
-      {user}
-    </div>
-  </main>
-)
 
-const copyRight = 'Copyright 2020'
-
-// JSX element, footer
-const footer = (
-  <footer>
-    <div className='footer-wrapper'>
-      <p>{copyRight}</p>
-    </div>
-  </footer>
-)
-
-// JSX element, app
-const app = (
-  <div className='app'>
-    {header}
-    {main}
-    {footer}
-  </div>
-)
-
+// Render
 const rootElement = document.getElementById('root')
-// we render the JSX element using the ReactDOM package
-ReactDOM.render(app, rootElement)
+ReactDOM.render(App, rootElement);
+
