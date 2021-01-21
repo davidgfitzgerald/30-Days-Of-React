@@ -59,7 +59,6 @@ const FrontEndTechnologies = () => {
   )
 }
 
-// Exercise 2b
 const SignUp = () => {
   return (<div>
     <input id="first-name" placeholder="First Name" className="signup"/>
@@ -110,7 +109,6 @@ const VerifiedTick = () => {
   )
 }
 
-// Exercise 3
 const PersonalTechProfile = () => {
   return (
     <div className="personal-tech-profile-wrapper">
@@ -126,11 +124,37 @@ const PersonalTechProfile = () => {
   )
 }
 
+function randomHex () {
+  let hexString = "#"
+  for (let i=0; i<6; i++) {
+    hexString += Math.floor(Math.random() * 16).toString(16)
+  }
+  return hexString
+}
+
+const HexBar = () => {
+  const hexString = randomHex();
+  const style = {
+    backgroundColor: hexString
+  }
+  return (
+    <div className="hex-bar" style={style}>
+      {randomHex()}
+    </div>
+  )
+}
+
+const HexBars = ({amount}) => {
+  return <div>{Array(amount).fill(<HexBar/>)}</div>
+}
+
 const App = () => {
   return (
     <div>
       <PersonalTechProfile/>
       <FrontEndTechnologies/>
+      <HexBar/>
+      <HexBars amount={5}/>
       <SubscribeForm/>
     </div>
   )

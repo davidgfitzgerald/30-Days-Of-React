@@ -1,0 +1,77 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  height: 100%;
+  line-height: 1.5;
+  font-family: 'Montserrat',serif;
+  font-weight: 300;
+  color: black;
+}
+
+h1 {
+  font-size: 70px;
+  font-weight: 300;
+}
+
+h2,
+h3 {
+  font-weight: 300;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+}
+
+.subtitle {
+  @extend .title
+}
+
+.grid-container {
+  margin: 3vh;
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto auto auto;
+  grid-gap: 0.2vh;
+}
+
+.grid-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vh;
+  color: white;
+
+  background-color: red;
+}
+
+.grid-number {
+  @extend .grid-item;
+  font-size: 150%;
+}
+
+.grid-hex {
+  @extend .grid-item;
+  font-size: 75%;
+}
+
+.population-graph {
+  margin: 2vw 10vw;
+  padding-bottom: 3vh;
+}
+
+.country-data {
+  margin: 3vh;
+  display: grid;
+  grid-template-columns: 12% 76% 12%;
+}
+
+.population-bar {
+  background-color: orange;
+  border-radius: 5px;
+  max-width: 95%;
+}

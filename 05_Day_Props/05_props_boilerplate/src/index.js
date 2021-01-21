@@ -1,151 +1,107 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import asabenehImage from './images/asabeneh.jpg'
+import './index.scss'
+import populationData from './populationData'
 
-// Fuction to show month date year
-
-const showDate = (time) => {
-  const months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ]
-
-  const month = months[time.getMonth()].slice(0, 3)
-  const year = time.getFullYear()
-  const date = time.getDate()
-  return ` ${month} ${date}, ${year}`
+const Title = () => {
+  return (
+    <div>
+      <h1 className="title">30 Days Of React - Day 5</h1>
+      <h2 className="subtitle">Number Generator</h2>
+    </div>
+    )
 }
 
-// Header Component
-const Header = ({
-  data: {
-    welcome,
-    title,
-    subtitle,
-    author: { firstName, lastName },
-    date,
-  },
-}) => {
+const NumberGrid = () => {
+  const numbers = [...Array(32).keys()]
   return (
-    <header>
-      <div className='header-wrapper'>
-        <h1>{welcome}</h1>
-        <h2>{title}</h2>
-        <h3>{subtitle}</h3>
-        <p>
-          {firstName} {lastName}
-        </p>
-        <small>{showDate(date)}</small>
-      </div>
-    </header>
+    <div className="grid-container">
+      {numbers.map((number)=><NumberItem key={number} number={number}/>)}
+    </div>
   )
 }
 
-// TechList Component
-const TechList = ({ techs }) => {
-  const techList = techs.map((tech) => <li key={tech}>{tech}</li>)
-  return techList
+function determineColour(number) {
+  if (isPrime(number)) return "#dc3545" // red
+  else if (number % 2 === 0) return "#28a745" // green
+  else return "#fd7e14" // amber
 }
 
-// User Card Component
-const UserCard = ({ user: { firstName, lastName, image } }) => (
-  <div className='user-card'>
-    <img src={image} alt={firstName} />
-    <h2>
-      {firstName}
-      {lastName}
-    </h2>
-  </div>
-)
-
-// A button component
-
-const Button = ({ text, onClick, style }) => (
-  <button style={style} onClick={onClick}>
-    {text}
-  </button>
-)
-
-const buttonStyles = {
-  backgroundColor: '#61dbfb',
-  padding: 10,
-  border: 'none',
-  borderRadius: 5,
-  margin: 3,
-  cursor: 'pointer',
-  fontSize: 18,
-  color: 'white',
+function isPrime(number) {
+  if ([0,1].includes(number)) return false
+  if (number === 2) return true
+  for (let i=2; i<Math.ceil(Math.sqrt(number))+1; i++) {
+    if (number % i === 0) return false
+  }
+  return true
 }
 
-// Main Component
-const Main = ({ user, techs, greetPeople, handleTime }) => (
-  <main>
-    <div className='main-wrapper'>
-      <p>Prerequisite to get started react.js:</p>
-      <ul>
-        <TechList techs={techs} />
-      </ul>
-      <UserCard user={user} />
-      <Button text='Greet People' onClick={greetPeople} style={buttonStyles} />
-      <Button text='Show Time' onClick={handleTime} style={buttonStyles} />
-    </div>
-  </main>
-)
+const NumberItem = ({number}) => {
+  const colour = determineColour(number)
+  const style = {backgroundColor: colour}
+  return <div key={number} className="grid-number" style={style}>{number}</div>
+}
 
-// Footer Component
-const Footer = ({ copyRight }) => (
-  <footer>
-    <div className='footer-wrapper'>
-      <p>Copyright {copyRight.getFullYear()}</p>
-    </div>
-  </footer>
-)
+const HexItem = ({hexCode}) => {
+  const style = {backgroundColor: hexCode}
+  return <div key={hexCode} className="grid-hex" style={style}>{hexCode}</div>
+}
 
-// The App, or the parent or the container component
-// Functional Component
-const App = () => {
-  const data = {
-    welcome: 'Welcome to 30 Days Of React',
-    title: 'Getting Started React',
-    subtitle: 'JavaScript Library',
-    author: {
-      firstName: 'Asabeneh',
-      lastName: 'Yetayeh',
-    },
-    date: new Date(), // date needs to be formatted to a human readable format
+function randomHex () {
+  let hexString = "#"
+  for (let i=0; i<6; i++) {
+    hexString += Math.floor(Math.random() * 16).toString(16)
   }
-  const date = new Date()
-  const techs = ['HTML', 'CSS', 'JavaScript']
-  // copying the author from data object to user variable using spread operator
-  const user = { ...data.author, image: asabenehImage }
+  return hexString
+}
 
-  const handleTime = () => {
-    alert(showDate(new Date()))
-  }
-  const greetPeople = () => {
-    alert('Welcome to 30 Days Of React Challenge, 2020')
-  }
-
+const HexGrid = () => {
+  const numbers = [...Array(32).keys()]
   return (
-    <div className='app'>
-      <Header data={data} />
-      <Main
-        user={user}
-        techs={techs}
-        handleTime={handleTime}
-        greetPeople={greetPeople}
-      />
-      <Footer copyRight={date} />
+    <div className="grid-container">
+      {numbers.map((number)=><HexItem key={number} hexCode={randomHex()}/>)}
+    </div>
+  )
+}
+
+function commaFormattedNumber(number) {
+  return number.toString().split("").reverse().reduce((acc, curr, ind)=>{
+    if (ind > 0 && ind % 3 === 0) acc = "," + acc
+    return curr + acc
+  }, "")
+}
+
+const CountryPopulation = ({data: {country, population}, percentFill}) => {
+  console.log(percentFill)
+  const barStyle = {width: `${percentFill}%`}
+  return (
+    <div key={country} className="country-data">
+      <div>{country.toUpperCase()}</div>
+      <div className="population-bar" style={barStyle}/>
+      <div>{commaFormattedNumber(population)}</div>
+    </div>
+  )
+}
+
+const PopulationGraph = () => {
+  const worldPopulation = populationData[0].population
+  return (
+    <div className="population-graph">
+      {populationData.map((countryData) => {
+        let percentFill = (countryData.population / worldPopulation)*100
+        return <CountryPopulation key={countryData.country} data={countryData} percentFill={percentFill}/>
+      })}
+    </div>
+  )
+}
+
+const App = () => {
+  return (
+    <div>
+      <Title/>
+      <NumberGrid/>
+      <HexGrid/>
+      <PopulationGraph/>
     </div>
   )
 }
