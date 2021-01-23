@@ -5,6 +5,9 @@ import asabenehImage from './images/asabeneh.jpg'
 
 // Fuction to show month date year
 
+const lighterBlue = "#61dbfb"
+const darkNavy = "#160b48"
+
 const showDate = (time) => {
   const months = [
     'January',
@@ -63,6 +66,13 @@ class Header extends React.Component {
     super(props)
     // the code inside the constructor run before any other code
   }
+
+  styles () {
+    return this.props.darkMode ?
+      {backgroundColor: darkNavy, color: "white"} :
+      {backgroundColor: lighterBlue, color: "black"}
+  }
+
   render() {
     console.log(this.props.data)
     const {
@@ -74,7 +84,7 @@ class Header extends React.Component {
     } = this.props.data
 
     return (
-      <header style={this.props.styles}>
+      <header style={this.styles()}>
         <div className='header-wrapper'>
           <h1>{welcome}</h1>
           <h2>{title}</h2>
@@ -118,6 +128,11 @@ class Main extends React.Component {
   constructor(props) {
     super(props)
   }
+  styles () {
+    return this.props.darkMode ?
+      {backgroundColor: darkNavy, color: "white"} :
+      {backgroundColor: "none", color: "black"}
+  }
   render() {
     const {
       techs,
@@ -130,7 +145,7 @@ class Main extends React.Component {
       minusOne,
     } = this.props
     return (
-      <main>
+      <main style={this.styles()}>
         <div className='main-wrapper'>
           <p>Prerequisite to get started react.js:</p>
           <ul>
@@ -161,9 +176,16 @@ class Footer extends React.Component {
   constructor(props) {
     super(props)
   }
+
+  styles () {
+    return this.props.darkMode ?
+      {backgroundColor: darkNavy, color: "white"} :
+      {backgroundColor: lighterBlue, color: "black"}
+  }
+
   render() {
     return (
-      <footer>
+      <footer style={this.styles()}>
         <div className='footer-wrapper'>
           <p>Copyright {this.props.date.getFullYear()}</p>
         </div>
@@ -175,6 +197,7 @@ class Footer extends React.Component {
 class App extends React.Component {
   state = {
     count: 0,
+    darkMode: false,
     styles: {
       backgroundColor: '',
       color: '',
@@ -215,7 +238,9 @@ class App extends React.Component {
   greetPeople = () => {
     alert('Welcome to 30 Days Of React Challenge, 2020')
   }
-  changeBackground = () => {}
+  changeBackground = () => {
+    this.setState({darkMode: !this.state.darkMode})
+  }
   render() {
     const data = {
       welcome: 'Welcome to 30 Days Of React',
@@ -235,8 +260,9 @@ class App extends React.Component {
     return (
       <div className='app'>
         {this.state.backgroundColor}
-        <Header data={data} />
+        <Header data={data} darkMode={this.state.darkMode}/>
         <Main
+          darkMode={this.state.darkMode}
           user={user}
           techs={techs}
           handleTime={this.handleTime}
@@ -246,7 +272,7 @@ class App extends React.Component {
           minusOne={this.minusOne}
           count={this.state.count}
         />
-        <Footer date={new Date()} />
+        <Footer date={new Date()} darkMode={this.state.darkMode}/>
       </div>
     )
   }
